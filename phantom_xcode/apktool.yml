@@ -1,0 +1,23 @@
+version: 2.9.1
+apkFileName: XCODE-1.0.2.apk
+isFrameworkApk: false
+usesFramework:
+  ids:
+  - 1
+  tag: null
+sdkInfo:
+  minSdkVersion: 23
+  targetSdkVersion: 32
+packageInfo:
+  forcedPackageId: 127
+  renameManifestPackage: com.phantom.vpn
+versionInfo:
+  versionCode: 200
+  versionName: 2.0.0
+resourcesAreCompressed: false
+sharedLibrary: false
+sparseResources: false
+doNotCompress:
+- resources.arsc
+- assets/catalog.enc
+- assets/size-padding.bin

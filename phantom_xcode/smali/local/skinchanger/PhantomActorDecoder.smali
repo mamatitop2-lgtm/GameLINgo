@@ -1,0 +1,1751 @@
+.class public final Llocal/skinchanger/PhantomActorDecoder;
+.super Ljava/lang/Object;
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Llocal/skinchanger/PhantomActorDecoder$Reason;,
+        Llocal/skinchanger/PhantomActorDecoder$Stage;,
+        Llocal/skinchanger/PhantomActorDecoder$Failure;
+    }
+.end annotation
+
+
+# static fields
+.field public static final MAX_ITEMS:I = 0xa
+
+.field public static final MAX_ITEM_STATE:I = 0x8
+
+.field public static final MAX_SLOT:I = 0x9
+
+.field public static final MAX_WEAPON_ID:I = 0xff
+
+.field public static final a:Ljava/lang/ThreadLocal;
+
+.field public static final b:[[Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 13
+
+    new-instance v0, Llocal/skinchanger/PhantomActorDecoder$1;
+
+    invoke-direct {v0}, Llocal/skinchanger/PhantomActorDecoder$1;-><init>()V
+
+    sput-object v0, Llocal/skinchanger/PhantomActorDecoder;->a:Ljava/lang/ThreadLocal;
+
+    invoke-static {}, Llocal/skinchanger/PhantomActorDecoder$Stage;->values()[Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    move-result-object v0
+
+    invoke-static {}, Llocal/skinchanger/PhantomActorDecoder$Reason;->values()[Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    move-result-object v1
+
+    array-length v2, v0
+
+    array-length v3, v1
+
+    const/4 v4, 0x2
+
+    new-array v4, v4, [I
+
+    const/4 v5, 0x1
+
+    aput v3, v4, v5
+
+    const/4 v3, 0x0
+
+    aput v2, v4, v3
+
+    const-class v2, Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    invoke-static {v2, v4}, Ljava/lang/reflect/Array;->newInstance(Ljava/lang/Class;[I)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, [[Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    sput-object v2, Llocal/skinchanger/PhantomActorDecoder;->b:[[Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    array-length v2, v0
+
+    move v4, v3
+
+    :goto_0
+    if-ge v4, v2, :cond_1
+
+    aget-object v5, v0, v4
+
+    array-length v6, v1
+
+    move v7, v3
+
+    :goto_1
+    if-ge v7, v6, :cond_0
+
+    aget-object v8, v1, v7
+
+    sget-object v9, Llocal/skinchanger/PhantomActorDecoder;->b:[[Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    invoke-virtual {v5}, Ljava/lang/Enum;->ordinal()I
+
+    move-result v10
+
+    aget-object v9, v9, v10
+
+    invoke-virtual {v8}, Ljava/lang/Enum;->ordinal()I
+
+    move-result v10
+
+    new-instance v11, Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    const/4 v12, 0x0
+
+    invoke-direct {v11, v5, v8, v12}, Llocal/skinchanger/PhantomActorDecoder$Failure;-><init>(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;Llocal/skinchanger/PhantomActorDecoder$1;)V
+
+    aput-object v11, v9, v10
+
+    add-int/lit8 v7, v7, 0x1
+
+    goto :goto_1
+
+    :cond_0
+    add-int/lit8 v4, v4, 0x1
+
+    goto :goto_0
+
+    :cond_1
+    return-void
+.end method
+
+.method public constructor <init>()V
+    .locals 0
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method public static a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+    .locals 1
+
+    .line 1
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder;->b:[[Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    invoke-virtual {p0}, Ljava/lang/Enum;->ordinal()I
+
+    move-result p0
+
+    aget-object p0, v0, p0
+
+    invoke-virtual {p1}, Ljava/lang/Enum;->ordinal()I
+
+    move-result p1
+
+    aget-object p0, p0, p1
+
+    return-object p0
+.end method
+
+.method public static parse([BIIFZ)Llocal/skinchanger/M;
+    .locals 43
+
+    move-object/from16 v1, p0
+
+    move/from16 v2, p1
+
+    move/from16 v3, p2
+
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder;->a:Ljava/lang/ThreadLocal;
+
+    invoke-virtual {v0}, Ljava/lang/ThreadLocal;->get()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, [I
+
+    const/4 v4, -0x1
+
+    invoke-static {v0, v4}, Ljava/util/Arrays;->fill([II)V
+
+    const/4 v5, 0x0
+
+    aput v3, v0, v5
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->HEADER_TIME:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    new-instance v7, Llocal/skinchanger/H;
+
+    invoke-direct {v7, v1, v2, v3}, Llocal/skinchanger/H;-><init>([BII)V
+
+    const/high16 v8, 0x3f800000    # 1.0f
+
+    add-float v8, p3, v8
+
+    const v9, 0x3a83126f    # 0.001f
+
+    :try_start_0
+    invoke-virtual {v7, v9, v8}, Llocal/skinchanger/H;->g(FF)F
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->HEALTH:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->j()I
+
+    move-result v12
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->j()I
+
+    move-result v13
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->h()I
+
+    move-result v14
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->h()I
+
+    move-result v15
+
+    move/from16 v16, v4
+
+    const/16 v4, 0x1f4
+
+    if-gt v12, v4, :cond_30
+
+    if-gt v13, v4, :cond_30
+
+    if-gt v14, v4, :cond_30
+
+    if-gt v15, v4, :cond_30
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->VIEW:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    iget v5, v7, Llocal/skinchanger/H;->d:I
+    :try_end_0
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_1
+
+    move/from16 v18, v9
+
+    const/4 v9, 0x7
+
+    if-gez v5, :cond_1
+
+    :try_start_1
+    iget v5, v7, Llocal/skinchanger/H;->c:I
+    :try_end_1
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_1 .. :try_end_1} :catch_0
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    if-le v5, v9, :cond_0
+
+    goto :goto_0
+
+    :cond_0
+    const/4 v5, 0x0
+
+    goto :goto_1
+
+    :catchall_0
+    move-exception v0
+
+    const/4 v8, -0x1
+
+    const/4 v10, -0x1
+
+    goto/16 :goto_20
+
+    :catch_0
+    move-exception v0
+
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    goto/16 :goto_1e
+
+    :cond_1
+    :goto_0
+    const/4 v5, 0x1
+
+    :goto_1
+    :try_start_2
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    move-result v20
+
+    if-eqz v20, :cond_2
+
+    move/from16 v20, v9
+
+    const/4 v9, 0x1
+
+    goto :goto_2
+
+    :cond_2
+    move/from16 v20, v9
+
+    const/4 v9, 0x0
+
+    :goto_2
+    const v11, 0x461c4000    # 10000.0f
+
+    const v4, -0x39e3c000    # -10000.0f
+
+    const/16 v23, 0x1
+
+    invoke-virtual {v7, v4, v11}, Llocal/skinchanger/H;->g(FF)F
+
+    move-result v10
+
+    move-object/from16 v24, v0
+
+    invoke-virtual {v7, v4, v11}, Llocal/skinchanger/H;->g(FF)F
+
+    move-result v0
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->ITEM_COUNT:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    move-result v4
+
+    aput v4, v24, v23
+
+    move/from16 v11, v23
+
+    if-lt v4, v11, :cond_2f
+
+    const/16 v11, 0xa
+
+    if-gt v4, v11, :cond_2f
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->ITEMS:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    move/from16 v26, v11
+
+    new-instance v11, Ljava/util/HashMap;
+
+    invoke-direct {v11}, Ljava/util/HashMap;-><init>()V
+
+    new-instance v3, Ljava/util/HashSet;
+
+    invoke-direct {v3}, Ljava/util/HashSet;-><init>()V
+
+    move/from16 v27, v0
+
+    new-instance v0, Ljava/util/HashSet;
+
+    invoke-direct {v0}, Ljava/util/HashSet;-><init>()V
+
+    move/from16 v28, v10
+
+    new-instance v10, Ljava/util/ArrayList;
+
+    invoke-direct {v10}, Ljava/util/ArrayList;-><init>()V
+    :try_end_2
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_2 .. :try_end_2} :catch_0
+    .catchall {:try_start_2 .. :try_end_2} :catchall_1
+
+    move/from16 v29, v5
+
+    move/from16 v30, v9
+
+    const/4 v5, 0x0
+
+    :goto_3
+    const/16 v31, 0xb
+
+    const/16 v32, 0x6
+
+    const/16 v33, 0x2
+
+    const/16 v34, 0x3
+
+    const/16 v35, 0x4
+
+    if-ge v5, v4, :cond_14
+
+    :try_start_3
+    aput v5, v24, v33
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    move-result v36
+
+    aput v36, v24, v34
+
+    move/from16 v37, v4
+
+    move/from16 v9, v35
+
+    :goto_4
+    const/16 v4, 0xc
+
+    if-ge v9, v4, :cond_3
+
+    aput v16, v24, v9
+
+    add-int/lit8 v9, v9, 0x1
+
+    goto :goto_4
+
+    :cond_3
+    aget v4, v24, v34
+
+    if-nez v4, :cond_13
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    move-result v4
+
+    aput v4, v24, v35
+
+    iget v9, v7, Llocal/skinchanger/H;->b:I
+
+    move/from16 v38, v5
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->j()I
+
+    move-result v5
+
+    const/16 v34, 0x5
+
+    aput v5, v24, v34
+
+    move/from16 v39, v15
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    move-result v15
+
+    aput v15, v24, v32
+
+    move/from16 v40, v14
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->h()I
+
+    move-result v14
+
+    aput v14, v24, v20
+    :try_end_3
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_3 .. :try_end_3} :catch_0
+    .catchall {:try_start_3 .. :try_end_3} :catchall_0
+
+    move/from16 v41, v13
+
+    const/high16 v13, -0x3b860000    # -1000.0f
+
+    :try_start_4
+    invoke-virtual {v7, v13, v8}, Llocal/skinchanger/H;->g(FF)F
+
+    move-result v13
+    :try_end_4
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_4 .. :try_end_4} :catch_1
+    .catchall {:try_start_4 .. :try_end_4} :catchall_0
+
+    const v32, -0x3b864000    # -999.0f
+
+    cmpg-float v34, v13, v32
+
+    const/16 v35, 0x0
+
+    if-gtz v34, :cond_4
+
+    const/16 v33, 0x0
+
+    goto :goto_5
+
+    :cond_4
+    cmpg-float v34, v13, v35
+
+    if-gez v34, :cond_5
+
+    const/16 v33, 0x1
+
+    :cond_5
+    :goto_5
+    :try_start_5
+    aput v33, v24, v26
+
+    move/from16 v34, v13
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    move-result v13
+
+    move/from16 v42, v12
+
+    const/16 v12, 0x8
+
+    aput v13, v24, v12
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    move-result v12
+
+    const/16 v2, 0x9
+
+    aput v12, v24, v2
+
+    iget v2, v7, Llocal/skinchanger/H;->b:I
+
+    sub-int v2, v2, p1
+
+    aput v2, v24, v31
+
+    const/4 v2, 0x1
+
+    if-lt v4, v2, :cond_12
+
+    const/16 v2, 0xff
+
+    if-gt v4, v2, :cond_12
+
+    const/16 v2, 0x1000
+
+    if-gt v5, v2, :cond_11
+
+    const/16 v2, 0xc8
+
+    if-gt v15, v2, :cond_10
+
+    const/16 v2, 0x3e8
+
+    if-gt v14, v2, :cond_f
+
+    const/4 v2, 0x1
+
+    if-lt v13, v2, :cond_e
+
+    const/16 v2, 0x9
+
+    if-gt v13, v2, :cond_e
+
+    invoke-static {v13}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    invoke-virtual {v3, v2}, Ljava/util/HashSet;->add(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-nez v2, :cond_6
+
+    invoke-static {v13}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    invoke-virtual {v11, v2}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Ljava/lang/Integer;
+
+    const/16 v5, 0x9
+
+    if-ne v13, v5, :cond_8
+
+    if-eqz v2, :cond_8
+
+    const/16 v5, 0x65
+
+    if-ne v4, v5, :cond_7
+
+    invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I
+
+    move-result v5
+
+    const/16 v14, 0x66
+
+    if-eq v5, v14, :cond_6
+
+    goto :goto_7
+
+    :cond_6
+    :goto_6
+    const/16 v2, 0x9
+
+    goto :goto_8
+
+    :cond_7
+    :goto_7
+    const/16 v5, 0x66
+
+    if-ne v4, v5, :cond_8
+
+    invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I
+
+    move-result v2
+
+    const/16 v5, 0x65
+
+    if-ne v2, v5, :cond_8
+
+    goto :goto_6
+
+    :cond_8
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->DUPLICATE_SLOT:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :goto_8
+    if-ne v13, v2, :cond_9
+
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Ljava/util/HashSet;->add(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_a
+
+    :cond_9
+    const/16 v2, 0x8
+
+    goto :goto_9
+
+    :cond_a
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->DUPLICATE_SLOT:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :goto_9
+    if-gt v12, v2, :cond_d
+
+    cmpl-float v2, v34, v32
+
+    if-lez v2, :cond_c
+
+    cmpg-float v2, v34, v35
+
+    if-ltz v2, :cond_b
+
+    goto :goto_a
+
+    :cond_b
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->NEGATIVE_TIME:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :cond_c
+    :goto_a
+    new-instance v2, Llocal/skinchanger/T;
+
+    invoke-direct {v2}, Llocal/skinchanger/T;-><init>()V
+
+    iput v4, v2, Llocal/skinchanger/T;->a:I
+
+    iput v9, v2, Llocal/skinchanger/T;->b:I
+
+    invoke-virtual {v10, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    invoke-static {v13}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v4
+
+    invoke-virtual {v11, v2, v4}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    add-int/lit8 v5, v38, 0x1
+
+    move/from16 v2, p1
+
+    move/from16 v4, v37
+
+    move/from16 v15, v39
+
+    move/from16 v14, v40
+
+    move/from16 v13, v41
+
+    move/from16 v12, v42
+
+    goto/16 :goto_3
+
+    :cond_d
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->ITEM_STATE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :cond_e
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->SLOT_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :cond_f
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->ITEM_SHORT:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :cond_10
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->ITEM_BYTE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :cond_11
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->REFERENCE_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :cond_12
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->WEAPON_KIND:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :catch_1
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->ITEM_TIME:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+
+    :cond_13
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->ITEM_FLAG:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    throw v0
+    :try_end_5
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_5 .. :try_end_5} :catch_0
+    .catchall {:try_start_5 .. :try_end_5} :catchall_0
+
+    :cond_14
+    move/from16 v42, v12
+
+    move/from16 v41, v13
+
+    move/from16 v40, v14
+
+    move/from16 v39, v15
+
+    :try_start_6
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->ACTIVE_ITEM:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    move-result v0
+
+    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    invoke-virtual {v3, v2}, Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_2e
+
+    move/from16 v2, v33
+
+    const/4 v3, 0x0
+
+    :goto_b
+    if-lt v3, v2, :cond_2c
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->ACTION_TIMES:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    const/high16 v13, -0x3b860000    # -1000.0f
+
+    invoke-virtual {v7, v13, v8}, Llocal/skinchanger/H;->g(FF)F
+
+    invoke-virtual {v7, v13, v8}, Llocal/skinchanger/H;->g(FF)F
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->ANIMATION:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    move/from16 v2, v35
+
+    invoke-virtual {v7, v2}, Llocal/skinchanger/H;->b(I)I
+
+    move-result v3
+
+    invoke-virtual {v7, v2}, Llocal/skinchanger/H;->b(I)I
+
+    move-result v4
+
+    invoke-virtual {v7, v13, v8}, Llocal/skinchanger/H;->g(FF)F
+
+    invoke-virtual {v7, v13, v8}, Llocal/skinchanger/H;->g(FF)F
+    :try_end_6
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_6 .. :try_end_6} :catch_0
+    .catchall {:try_start_6 .. :try_end_6} :catchall_1
+
+    move/from16 v2, v31
+
+    const/4 v5, 0x0
+
+    :goto_c
+    if-ge v5, v2, :cond_15
+
+    const v9, 0x461c4000    # 10000.0f
+
+    :try_start_7
+    invoke-static {v9, v8}, Ljava/lang/Math;->max(FF)F
+
+    move-result v12
+
+    const v13, -0x39e3c000    # -10000.0f
+
+    invoke-virtual {v7, v13, v12}, Llocal/skinchanger/H;->g(FF)F
+    :try_end_7
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_7 .. :try_end_7} :catch_0
+    .catchall {:try_start_7 .. :try_end_7} :catchall_0
+
+    add-int/lit8 v5, v5, 0x1
+
+    goto :goto_c
+
+    :cond_15
+    :try_start_8
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    const/high16 v2, 0x42700000    # 60.0f
+
+    add-float v2, p3, v2
+
+    const/high16 v13, -0x3b860000    # -1000.0f
+
+    invoke-virtual {v7, v13, v2}, Llocal/skinchanger/H;->g(FF)F
+
+    invoke-virtual {v7, v13, v2}, Llocal/skinchanger/H;->g(FF)F
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->f()I
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->HISTORY:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    move/from16 v2, v32
+
+    invoke-virtual {v7, v2}, Llocal/skinchanger/H;->b(I)I
+
+    move-result v5
+    :try_end_8
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_8 .. :try_end_8} :catch_0
+    .catchall {:try_start_8 .. :try_end_8} :catchall_1
+
+    if-eqz v5, :cond_17
+
+    if-eqz p4, :cond_16
+
+    goto :goto_d
+
+    .line 1
+    :cond_16
+    :try_start_9
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 2
+    throw v0
+    :try_end_9
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_9 .. :try_end_9} :catch_0
+    .catchall {:try_start_9 .. :try_end_9} :catchall_0
+
+    :cond_17
+    :goto_d
+    const/16 v2, 0x10
+
+    if-gt v5, v2, :cond_2b
+
+    const/4 v2, 0x0
+
+    :goto_e
+    const v9, 0x1e8480
+
+    const/16 v12, 0x15
+
+    if-lt v2, v5, :cond_22
+
+    :try_start_a
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->POSITION:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    invoke-virtual {v7, v12}, Llocal/skinchanger/H;->i(I)I
+
+    move-result v2
+
+    const/16 v5, 0x14
+
+    invoke-virtual {v7, v5}, Llocal/skinchanger/H;->i(I)I
+
+    move-result v5
+
+    invoke-virtual {v7, v12}, Llocal/skinchanger/H;->i(I)I
+
+    move-result v8
+
+    if-gt v2, v9, :cond_21
+
+    const v12, 0xc3500
+
+    if-gt v5, v12, :cond_21
+
+    if-gt v8, v9, :cond_21
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->VELOCITY:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    const/4 v14, 0x6
+
+    new-array v9, v14, [F
+    :try_end_a
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_a .. :try_end_a} :catch_0
+    .catchall {:try_start_a .. :try_end_a} :catchall_1
+
+    const/4 v12, 0x0
+
+    :goto_f
+    if-ge v12, v14, :cond_19
+
+    :try_start_b
+    invoke-virtual {v7}, Llocal/skinchanger/H;->j()I
+
+    move-result v13
+
+    const v15, 0xea60
+
+    if-gt v13, v15, :cond_18
+
+    int-to-float v13, v13
+
+    mul-float v13, v13, v18
+
+    const/high16 v15, 0x41f00000    # 30.0f
+
+    sub-float/2addr v13, v15
+
+    aput v13, v9, v12
+
+    add-int/lit8 v12, v12, 0x1
+
+    goto :goto_f
+
+    .line 3
+    :cond_18
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 4
+    throw v0
+    :try_end_b
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_b .. :try_end_b} :catch_0
+    .catchall {:try_start_b .. :try_end_b} :catchall_0
+
+    :cond_19
+    :try_start_c
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->ROTATION:Llocal/skinchanger/PhantomActorDecoder$Stage;
+    :try_end_c
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_c .. :try_end_c} :catch_0
+    .catchall {:try_start_c .. :try_end_c} :catchall_1
+
+    move/from16 v13, v34
+
+    const/4 v12, 0x0
+
+    :goto_10
+    if-ge v12, v13, :cond_1d
+
+    :try_start_d
+    invoke-virtual {v7}, Llocal/skinchanger/H;->j()I
+
+    move-result v13
+
+    shr-int/lit8 v14, v13, 0xa
+
+    and-int/lit8 v14, v14, 0x1f
+
+    const/16 v15, 0x1f
+
+    if-eq v14, v15, :cond_1c
+
+    const v15, 0x8000
+
+    and-int/2addr v15, v13
+
+    if-nez v15, :cond_1a
+
+    const/4 v15, 0x1
+
+    goto :goto_11
+
+    :cond_1a
+    move/from16 v15, v16
+
+    :goto_11
+    and-int/lit16 v13, v13, 0x3ff
+
+    move/from16 v17, v14
+
+    int-to-double v14, v15
+
+    if-nez v17, :cond_1b
+
+    int-to-float v13, v13
+
+    move/from16 v20, v0
+
+    const/16 v0, -0x18
+
+    invoke-static {v13, v0}, Ljava/lang/Math;->scalb(FI)F
+
+    move-result v0
+
+    :goto_12
+    move/from16 v17, v12
+
+    goto :goto_13
+
+    :cond_1b
+    move/from16 v20, v0
+
+    add-int/lit16 v13, v13, 0x400
+
+    int-to-float v0, v13
+
+    add-int/lit8 v13, v17, -0x19
+
+    invoke-static {v0, v13}, Ljava/lang/Math;->scalb(FI)F
+
+    move-result v0
+
+    goto :goto_12
+
+    :goto_13
+    float-to-double v12, v0
+
+    mul-double/2addr v14, v12
+
+    double-to-float v0, v14
+
+    invoke-static {v0}, Ljava/lang/Math;->abs(F)F
+
+    move-result v0
+
+    const/high16 v12, 0x447a0000    # 1000.0f
+
+    cmpg-float v0, v0, v12
+
+    if-gtz v0, :cond_1c
+
+    add-int/lit8 v12, v17, 0x1
+
+    move/from16 v0, v20
+
+    const/4 v13, 0x3
+
+    goto :goto_10
+
+    .line 5
+    :cond_1c
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 6
+    throw v0
+    :try_end_d
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_d .. :try_end_d} :catch_0
+    .catchall {:try_start_d .. :try_end_d} :catchall_0
+
+    :cond_1d
+    move/from16 v20, v0
+
+    :try_start_e
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->COSMETICS:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    iget v0, v7, Llocal/skinchanger/H;->b:I
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->f()I
+
+    move-result v12
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->f()I
+
+    move-result v13
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->f()I
+
+    move-result v14
+
+    if-eqz v12, :cond_1f
+
+    const/16 v15, 0xbb8
+
+    if-lt v12, v15, :cond_1e
+
+    const/16 v15, 0xbfd
+
+    if-gt v12, v15, :cond_1e
+
+    const/16 v15, 0xbd5
+
+    if-eq v12, v15, :cond_1e
+
+    goto :goto_14
+
+    :cond_1e
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    goto/16 :goto_17
+
+    :cond_1f
+    :goto_14
+    if-ltz v13, :cond_1e
+
+    const/16 v12, 0x3e8
+
+    if-gt v13, v12, :cond_1e
+
+    if-ltz v14, :cond_1e
+
+    const v12, 0xf4240
+
+    if-gt v14, v12, :cond_1e
+
+    sget-object v6, Llocal/skinchanger/PhantomActorDecoder$Stage;->BOUNDS:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    iget v12, v7, Llocal/skinchanger/H;->b:I
+
+    array-length v13, v1
+
+    const/16 v35, 0x4
+
+    add-int/lit8 v13, v13, -0x4
+
+    if-gt v12, v13, :cond_20
+
+    move/from16 v13, p1
+
+    add-int/lit16 v14, v13, 0x200
+
+    if-gt v12, v14, :cond_20
+
+    new-instance v12, Llocal/skinchanger/M;
+
+    invoke-direct {v12}, Llocal/skinchanger/M;-><init>()V
+
+    iput v0, v12, Llocal/skinchanger/M;->a:I
+
+    iput-object v10, v12, Llocal/skinchanger/M;->p:Ljava/util/List;
+
+    invoke-static/range {v20 .. v20}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v0
+
+    invoke-virtual {v11, v0}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/lang/Integer;
+
+    invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
+
+    move-result v0
+
+    iput v0, v12, Llocal/skinchanger/M;->weaponId:I
+
+    iput v3, v12, Llocal/skinchanger/M;->viewMode:I
+
+    iput v4, v12, Llocal/skinchanger/M;->alternateViewMode:I
+
+    add-int/lit8 v0, v13, 0x3
+
+    invoke-static {v1, v0}, Llocal/skinchanger/U;->s([BI)I
+
+    move-result v0
+
+    iput v0, v12, Llocal/skinchanger/M;->b:I
+
+    invoke-static/range {p0 .. p1}, Llocal/skinchanger/U;->h([BI)I
+
+    move-result v0
+
+    iput v0, v12, Llocal/skinchanger/M;->c:I
+
+    move/from16 v0, v42
+
+    iput v0, v12, Llocal/skinchanger/M;->d:I
+
+    move/from16 v15, v41
+
+    iput v15, v12, Llocal/skinchanger/M;->e:I
+
+    move/from16 v0, v40
+
+    iput v0, v12, Llocal/skinchanger/M;->f:I
+
+    move/from16 v0, v39
+
+    iput v0, v12, Llocal/skinchanger/M;->g:I
+
+    move/from16 v0, v30
+
+    iput-boolean v0, v12, Llocal/skinchanger/M;->h:Z
+
+    move/from16 v0, v29
+
+    iput-boolean v0, v12, Llocal/skinchanger/M;->i:Z
+
+    int-to-float v0, v2
+
+    const v2, 0x38d1b717    # 1.0E-4f
+
+    mul-float/2addr v0, v2
+
+    const/high16 v3, 0x42c80000    # 100.0f
+
+    sub-float/2addr v0, v3
+
+    iput v0, v12, Llocal/skinchanger/M;->j:F
+
+    int-to-float v0, v5
+
+    mul-float/2addr v0, v2
+
+    const/high16 v3, 0x42200000    # 40.0f
+
+    sub-float/2addr v0, v3
+
+    iput v0, v12, Llocal/skinchanger/M;->k:F
+
+    int-to-float v0, v8
+
+    mul-float/2addr v0, v2
+
+    const/high16 v2, 0x42c80000    # 100.0f
+
+    sub-float/2addr v0, v2
+
+    iput v0, v12, Llocal/skinchanger/M;->l:F
+
+    move/from16 v0, v28
+
+    iput v0, v12, Llocal/skinchanger/M;->m:F
+
+    move/from16 v0, v27
+
+    iput v0, v12, Llocal/skinchanger/M;->n:F
+
+    iput-object v9, v12, Llocal/skinchanger/M;->o:[F
+    :try_end_e
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_e .. :try_end_e} :catch_0
+    .catchall {:try_start_e .. :try_end_e} :catchall_1
+
+    :try_start_f
+    iget v6, v7, Llocal/skinchanger/H;->b:I
+
+    move/from16 v3, p2
+
+    move/from16 v4, p3
+
+    move/from16 v5, p4
+
+    move v2, v13
+
+    const/4 v7, -0x1
+
+    const/4 v8, -0x1
+
+    invoke-static/range {v1 .. v8}, Llocal/skinchanger/PhantomReplay;->a([BIIFZIII)V
+    :try_end_f
+    .catch Ljava/lang/RuntimeException; {:try_start_f .. :try_end_f} :catch_2
+
+    :catch_2
+    return-object v12
+
+    :catchall_1
+    move-exception v0
+
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    :goto_15
+    move/from16 v10, v19
+
+    :goto_16
+    move/from16 v8, v21
+
+    goto/16 :goto_20
+
+    :cond_20
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    .line 7
+    :try_start_10
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 8
+    throw v0
+
+    :catchall_2
+    move-exception v0
+
+    goto :goto_15
+
+    :catch_3
+    move-exception v0
+
+    goto/16 :goto_1e
+
+    .line 9
+    :goto_17
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 10
+    throw v0
+
+    :cond_21
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    .line 11
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 12
+    throw v0
+
+    :cond_22
+    move/from16 v20, v0
+
+    move/from16 v15, v41
+
+    move/from16 v0, v42
+
+    const/4 v14, 0x6
+
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    move-result v1
+
+    if-nez v1, :cond_2a
+
+    const/4 v1, 0x4
+
+    invoke-virtual {v7, v1}, Llocal/skinchanger/H;->b(I)I
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->f()I
+
+    move-result v1
+
+    ushr-int/lit8 v1, v1, 0x18
+
+    const/16 v13, 0x40
+
+    if-gt v1, v13, :cond_29
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    move-result v1
+
+    const/16 v13, 0x64
+
+    if-gt v1, v13, :cond_28
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    const/4 v9, 0x0
+
+    :goto_18
+    const/4 v1, 0x2
+
+    if-ge v9, v1, :cond_27
+
+    const/4 v12, 0x0
+
+    :goto_19
+    const/4 v1, 0x3
+
+    if-ge v12, v1, :cond_26
+
+    const/4 v1, 0x1
+
+    if-ne v12, v1, :cond_23
+
+    const/16 v23, 0x14
+
+    move/from16 v13, v23
+
+    goto :goto_1a
+
+    :cond_23
+    const/16 v13, 0x15
+
+    :goto_1a
+    invoke-virtual {v7, v13}, Llocal/skinchanger/H;->i(I)I
+
+    move-result v13
+
+    if-ne v12, v1, :cond_24
+
+    const v25, 0xc3500
+
+    move/from16 v1, v25
+
+    goto :goto_1b
+
+    :cond_24
+    const v1, 0x1e8480
+
+    :goto_1b
+    if-gt v13, v1, :cond_25
+
+    add-int/lit8 v12, v12, 0x1
+
+    const/16 v13, 0x64
+
+    goto :goto_19
+
+    .line 13
+    :cond_25
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 14
+    throw v0
+
+    :cond_26
+    add-int/lit8 v9, v9, 0x1
+
+    const/16 v12, 0x15
+
+    const/16 v13, 0x64
+
+    goto :goto_18
+
+    :cond_27
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    const/high16 v1, -0x3b860000    # -1000.0f
+
+    invoke-virtual {v7, v1, v8}, Llocal/skinchanger/H;->g(FF)F
+
+    goto :goto_1c
+
+    .line 15
+    :cond_28
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 16
+    throw v0
+
+    .line 17
+    :cond_29
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 18
+    throw v0
+
+    :cond_2a
+    const/high16 v1, -0x3b860000    # -1000.0f
+
+    :goto_1c
+    add-int/lit8 v2, v2, 0x1
+
+    const/16 v34, 0x3
+
+    move-object/from16 v1, p0
+
+    move/from16 v42, v0
+
+    move/from16 v41, v15
+
+    move/from16 v0, v20
+
+    goto/16 :goto_e
+
+    :cond_2b
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    .line 19
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 20
+    throw v0
+
+    :cond_2c
+    move/from16 v20, v0
+
+    move/from16 v2, v31
+
+    move/from16 v14, v32
+
+    move/from16 v15, v41
+
+    move/from16 v0, v42
+
+    const/high16 v1, -0x3b860000    # -1000.0f
+
+    const v9, 0x461c4000    # 10000.0f
+
+    const v13, -0x39e3c000    # -10000.0f
+
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    const/16 v22, 0x64
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->a()I
+
+    move-result v4
+
+    if-nez v4, :cond_2d
+
+    const/4 v4, 0x4
+
+    invoke-virtual {v7, v4}, Llocal/skinchanger/H;->b(I)I
+
+    invoke-virtual {v7}, Llocal/skinchanger/H;->e()I
+
+    goto :goto_1d
+
+    :cond_2d
+    const/4 v4, 0x4
+
+    :goto_1d
+    add-int/lit8 v3, v3, 0x1
+
+    const/16 v34, 0x3
+
+    move-object/from16 v1, p0
+
+    move/from16 v42, v0
+
+    move/from16 v31, v2
+
+    move/from16 v35, v4
+
+    move/from16 v32, v14
+
+    move/from16 v41, v15
+
+    move/from16 v0, v20
+
+    const/4 v2, 0x2
+
+    goto/16 :goto_b
+
+    :cond_2e
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    .line 21
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 22
+    throw v0
+
+    :cond_2f
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    .line 23
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 24
+    throw v0
+
+    :cond_30
+    const/16 v19, -0x1
+
+    const/16 v21, -0x1
+
+    .line 25
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 26
+    throw v0
+    :try_end_10
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_10 .. :try_end_10} :catch_3
+    .catchall {:try_start_10 .. :try_end_10} :catchall_2
+
+    :goto_1e
+    :try_start_11
+    instance-of v1, v0, Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    if-eqz v1, :cond_31
+
+    check-cast v0, Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    goto :goto_1f
+
+    .line 27
+    :cond_31
+    sget-object v0, Llocal/skinchanger/PhantomActorDecoder$Reason;->READER_RANGE:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-static {v6, v0}, Llocal/skinchanger/PhantomActorDecoder;->a(Llocal/skinchanger/PhantomActorDecoder$Stage;Llocal/skinchanger/PhantomActorDecoder$Reason;)Llocal/skinchanger/PhantomActorDecoder$Failure;
+
+    move-result-object v0
+
+    .line 28
+    :goto_1f
+    iget-object v1, v0, Llocal/skinchanger/PhantomActorDecoder$Failure;->stage:Llocal/skinchanger/PhantomActorDecoder$Stage;
+
+    invoke-virtual {v1}, Ljava/lang/Enum;->ordinal()I
+
+    move-result v10
+    :try_end_11
+    .catchall {:try_start_11 .. :try_end_11} :catchall_2
+
+    :try_start_12
+    iget-object v1, v0, Llocal/skinchanger/PhantomActorDecoder$Failure;->reason:Llocal/skinchanger/PhantomActorDecoder$Reason;
+
+    invoke-virtual {v1}, Ljava/lang/Enum;->ordinal()I
+
+    move-result v11
+    :try_end_12
+    .catchall {:try_start_12 .. :try_end_12} :catchall_4
+
+    :try_start_13
+    throw v0
+    :try_end_13
+    .catchall {:try_start_13 .. :try_end_13} :catchall_3
+
+    :catchall_3
+    move-exception v0
+
+    move v8, v11
+
+    goto :goto_20
+
+    :catchall_4
+    move-exception v0
+
+    goto/16 :goto_16
+
+    :goto_20
+    :try_start_14
+    iget v6, v7, Llocal/skinchanger/H;->b:I
+
+    move-object/from16 v1, p0
+
+    move/from16 v2, p1
+
+    move/from16 v3, p2
+
+    move/from16 v4, p3
+
+    move/from16 v5, p4
+
+    move v7, v10
+
+    invoke-static/range {v1 .. v8}, Llocal/skinchanger/PhantomReplay;->a([BIIFZIII)V
+    :try_end_14
+    .catch Ljava/lang/RuntimeException; {:try_start_14 .. :try_end_14} :catch_4
+
+    :catch_4
+    throw v0
+.end method

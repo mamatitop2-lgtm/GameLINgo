@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="15" package="local.xcode" platformBuildVersionCode="35" platformBuildVersionName="15">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <queries>
+        <package android:name="com.axlebolt.standoff2"/>
+        <package android:name="com.axlebolt.standoff2.huawei"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="tg"/>
+        </intent>
+    </queries>
+    <application android:allowBackup="false" android:debuggable="false" android:extractNativeLibs="true" android:fullBackupContent="false" android:icon="@drawable/xcode_icon" android:label="Phantom" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
+        <activity android:exported="true" android:launchMode="singleTask" android:name="local.skinchanger.MainActivity" android:resizeableActivity="true" android:screenOrientation="fullSensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <service android:exported="false" android:name="local.skinchanger.OverlayService"/>
+        <service android:exported="false" android:name="local.skinchanger.SkinVpnService" android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="android.net.VpnService"/>
+            </intent-filter>
+            <meta-data android:name="android.net.VpnService.SUPPORTS_ALWAYS_ON" android:value="false"/>
+        </service>
+        <receiver android:exported="true" android:name="local.skinchanger.XcodeChamsExportReceiver" android:permission="android.permission.DUMP"/>
+        <meta-data android:name="creator" android:value="XCODE"/>
+        <meta-data android:name="designer" android:value="XCODE"/>
+        <meta-data android:name="edition" android:value="XCODE Free"/>
+    </application>
+</manifest>
